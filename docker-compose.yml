@@ -1,0 +1,32 @@
+services:
+  server:
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: server
+    ports:
+      - "7111:7111"
+    networks:
+        - euroteka
+
+  client:
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: client
+    ports:
+      - "7211:7211"
+    networks:
+        - euroteka
+  
+  euroteka:
+    image: cloudready/spring-cloud-eureka-server:1.0.1
+    restart: unless-stopped
+    ports:
+      - "8761:8761"
+    networks:
+        - euroteka
+networks:
+  euroteka:
