@@ -9,6 +9,8 @@ services:
       - "7111:7111"
     networks:
         - euroteka
+    depends_on:
+      - euroteka
 
   client:
     restart: unless-stopped
@@ -20,7 +22,9 @@ services:
       - "7211:7211"
     networks:
         - euroteka
-  
+    depends_on:
+      - euroteka
+      
   euroteka:
     image: cloudready/spring-cloud-eureka-server:1.0.1
     restart: unless-stopped
